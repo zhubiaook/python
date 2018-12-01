@@ -9,3 +9,6 @@ b = 12
 print(f'')
 
 
+if a == 6:
+    print('Hello')
+    print('Good')
