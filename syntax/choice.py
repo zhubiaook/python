@@ -84,8 +84,7 @@ else:
     length3 = False
 
 if (length3 and length1 + length2 > length3
-        and length1 + length3 > length2
-        and length2 + length3 > length1):
+        and length1 + length3 > length2 and length2 + length3 > length1):
     p = (length1 + length2 + length3) / 2
     area = math.sqrt(p * (p - length1) * (p - length2) * (p - length3))
     print(f'The area of the triangle with length of {length1},'
