@@ -1,16 +1,20 @@
 """
-DESCRIPTION
+Just a test
 Version: 0.0
 Author: slynxes
 Date: 2018-12-01
 """
 
 
-def print_num(my_list):
-    my_list.append([1, 2, 3])
-    print(f'in: {my_list}')
+def main():
+    pass
 
 
-your_list = [10, 20, 30]
-print_num(your_list)
-print(f'out: {your_list}')
+def num():
+    for i in range(10):
+        yield i
+
+
+if __name__ == '__main__':
+    for x in num():
+        print(x)
