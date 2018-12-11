@@ -10,18 +10,22 @@ import datetime
 from pymongo import MongoClient
 import os
 
-now = datetime.datetime.now()
-delta = datetime.timedelta(days=10)
-n_days = now - delta
 
-
-def delete_sql():
+def delete_sql(exp_date, now_str):
+    """
+    从MySQL中读取图exp_days天前的图片路径
+    判断该图片是否存在，存在则删除
+    记录日志
+    :param exp_date:
+    :param now_str:
+    :return:
+    """
     conn = pymysql.connect(
         host='mysql.local.com',
         port=3306,
-        user='root',
-        password='123',
-        db='business',
+        user='USER',
+        password='PASSWORD',
+        db='DATABASE',
         charset='utf8'
     )
     cursor = conn.cursor()
@@ -33,33 +37,63 @@ def delete_sql():
         results = cursor.fetchall()
         for row in results:
             local_url = row[0]
-            ctime = row[2]
-            print(f'local_url = {local_url}, ctime = {ctime}')
+            file = '/data/fdfs/file/data' + local_url[10:]
+            if os.path.isfile(file):
+                os.remove(file)
+                content = now_str + ' ' + file
+                write_log('/data/fdfs/logs/remove.log', content)
     except (pymysql.err.OperationalError, pymysql.ProgrammingError,
             pymysql.InternalError, pymysql.IntegrityError, TypeError) as error:
         print('Error: unable to fetch data.')
         print(f'{error}')
-
     conn.close()
 
 
-def delete_mongodb():
+def delete_mongodb(exp_days, now_str):
+    """
+    从MongoDB中读取图exp_days天前的图片路径
+    判断该图片是否存在，存在则删除
+    记录日志
+    :param exp_days:
+    :param now_str:
+    :return:
+    """
     conn = MongoClient(
-        host='192.168.0.24',
+        host='mongo.local.com',
         port=27017,
-        # username='',
-        # password='',
+        # username='USER',
+        # password='PASSWORD',
+        # authSource='admin',
+        # authMechanism='SCRAM-SHA-256'
     )
     db = conn.qirong
     collection = db.offlinePicture.find(
-        {'ctime': {'$lt': n_days}},
+        {'ctime': {'$lt': exp_days}},
         {'localUrl': 1, 'ctime': 1}
     )
     for row in collection:
         local_url = row['localUrl']
-        path = '/data/fdfs/file/data' + local_url[10:]
-        print(path)
+        file = '/data/fdfs/file/data' + local_url[10:]
+        if os.path.isfile(file):
+            os.remove(file)
+            content = now_str + ' ' + file
+            write_log('/data/fdfs/logs/remove.log', content)
+
+
+def write_log(log_path, content):
+    """
+    记录日志
+    :param log_path:
+    :param content:
+    :return:
+    """
+    with open(log_path, 'a') as fpo:
+        fpo.write(content + '\n')
 
 
 if __name__ == '__main__':
-    delete_mongodb()
+    now = datetime.datetime.now()
+    delta = datetime.timedelta(days=10)
+    r_exp_days = now - delta
+    r_now_str = datetime.datetime.strftime(now, '%Y-%m-%d %H:%M:%S')
+    delete_mongodb(r_exp_days, r_now_str)
