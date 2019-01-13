@@ -45,6 +45,20 @@ def main():
     print(s1.pop('hdx'))
     print(s1.popitem())
 
+    # 字典函数
+    # dict.clean()
+    # dict.items()
+    # dict.keys()
+    # dict.values()
+    # dict.copy()
+
+    # 字典解析
+    # {exp1: exp2 for k, v in expression}
+    # {exp1: exp2 for k, v in expression if expression1}
+    # 取出字典中大于90的数
+    score = {'zhubiao': 130, 'zhangya': 98, 'xiocao': 60}
+    n_score = {k: v for k, v in score.items() if v > 90}
+
 
 if __name__ == '__main__':
     main()

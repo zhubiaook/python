@@ -109,6 +109,18 @@ def main():
     iterable = (x for x in range(10))
     print(type(iterable))
 
+    """
+    列表解析
+    [expression for x in iterable]
+    [expression for x in iterable if expression2]
+    [expression for x in iterable1 for y in iterable2]
+    """
+    list1 = [1, 3, -2, 9, -10]
+    # 去除列表中的负数
+    n_list1 = [x for x in list1 if x > 0]
+    # 求列表元素的平方
+    n_list2 = [x**2 for x in list1]
+
 
 if __name__ == '__main__':
     main()

@@ -50,13 +50,13 @@ def random_str2(length):
 
 
 def get_suffix(file_path):
-    i = -1
-    character = file_path[i]
-    suffix = character
-    while character != '.':
-        character = file_path[i]
+    suffix = ''
+    for letter in file_path[::-1]:
+        if letter != '.':
+            suffix = letter + suffix
+        else:
+            return suffix
 
 
 if __name__ == '__main__':
-    print(random_str2(10))
-
+    print(get_suffix('/zhubiao/ok/test.txt'))

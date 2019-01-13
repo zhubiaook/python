@@ -49,6 +49,11 @@ def main():
     print(set1 >= set2)
     print(set1.issubset(set2))
 
+    # 集合解析
+    # {expression for x in iterable}
+    # {expression for x in iterable if expression2}
+    # {expression for x in iterable1 for y in iterable2}
+
 
 if __name__ == '__main__':
     main()
