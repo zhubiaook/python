@@ -1,6 +1,6 @@
 """
 判断FastDFS中图片是否存在，
-存在则更新MongoDB中recPersonnelRecord中download为3
+存在则更新MongoDB数据库recPersonnelRecord和recVehicleRecord中download为3
 
 Version: 0.1
 Author: zhubiao
@@ -24,6 +24,7 @@ def update_picture(last_time):
         # authSource='admin',
         # authMechanism='SCRAM-SHA-256'
     )
+
     db = conn.qirong
     offline_picture = db.offlinePicture.find(
         {'ctime': {'$gt': last_time}},
@@ -38,6 +39,10 @@ def update_picture(last_time):
                 {'pictureUrlCatch': row['dahuaUrl']},
                 {'$set': {'download': 3}}
             )
+            db.recVehicleRecord.update_many(
+                {'pictureUrlCatch': row['dahuaUrl']},
+                {'$set': {'download': 3}}
+            )
 
 
 if __name__ == '__main__':
@@ -47,3 +52,4 @@ if __name__ == '__main__':
     delta = datetime.timedelta(hours=2)
     r_last_time = now - delta
     update_picture(r_last_time)
+
