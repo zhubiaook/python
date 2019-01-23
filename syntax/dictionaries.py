@@ -59,6 +59,17 @@ def main():
     score = {'zhubiao': 130, 'zhangya': 98, 'xiocao': 60}
     n_score = {k: v for k, v in score.items() if v > 90}
 
+    # 案例
+    def score(**kwargs):
+        """
+        kwargs为任意键值对组成的字典
+        :param kwargs:
+        :return:
+        """
+        print(kwargs)
+
+    score(name='zhubiao', age=20)
+
 
 if __name__ == '__main__':
     main()

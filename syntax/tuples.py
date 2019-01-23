@@ -32,6 +32,17 @@ def main():
     print(tuple(list1))
     print(tuple(str1))
 
+    # 案例
+    def score(*args):
+        """
+        args为任意元素组成的元祖
+        :param args:
+        :return:
+        """
+        print(args)
+
+    score(1, 2, 'English')
+
 
 if __name__ == '__main__':
     main()
