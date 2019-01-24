@@ -1,6 +1,11 @@
 """
-属性和方法的访问权限
-    属性访问权限
+类的组成
+    f, filed: 字段， 包括类字段，实例字段
+    p, property: 实例属性
+    m, method: 方法, 包括类方法，实例方法
+
+字段和方法的访问权限
+    字段访问权限
         name : 可见
         _name : 隐藏，但仍然可以被访问
         __name : 隐藏，不可以访问
@@ -52,6 +57,7 @@ Date: 2019-01-23
 
 
 class Student(object):
+    # 类属性
     gender = 'F'
 
     __slots__ = '_name', '_score', '_age', '_id'
@@ -84,19 +90,29 @@ class Student(object):
         # self.__class__.__qualname__ : 当前实例的类名称
         return f'__str__: {self.__class__.__module__}.{self.__class__.__qualname__}'
 
+    def __add__(self, other):
+        """
+        实例相加
+        :param other:
+        :return:
+        """
+        return self._score + other.scores
+
     def print_score(self):
         print(f'name = {self._name}, score = {self._score}, age = {self._age}')
 
     @property
     def scores(self):
+        """属性读取"""
         return self._score
 
     @scores.setter
     def scores(self, score):
+        """属性赋值"""
         self._score = score
 
     @staticmethod
-    def say_hello():
+    def static_m():
         """
         静态方法
         :return:
@@ -104,7 +120,7 @@ class Student(object):
         print('Hello World!')
 
     @classmethod
-    def cm(cls):
+    def class_m(cls):
         """
         类方法
         :return:
