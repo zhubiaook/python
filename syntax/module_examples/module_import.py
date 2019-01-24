@@ -31,16 +31,6 @@ Date: 2019-01-23
 import module_examples.m1 as m1
 
 # 导入模块中的部分类或函数
-from module_examples.m2 import Student as m3stu
-
-# 导入当前路径下的模块
-from .m3 import Student
-
-
-print(m1.who_am_i())
-
-stu1 = m3stu('zhubiao', 100)
-stu1.print_score()
-
+from module_examples.m2 import Student as m2stu
 
 

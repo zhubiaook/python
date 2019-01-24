@@ -12,9 +12,10 @@ def who_am_i():
 
 
 class Student(object):
-    def __init__(self, name, score):
-        self._name = name
+    def __init__(self, name, score, age):
+        self.name = name
         self._score = score
+        self.__age = 20
 
     def print_score(self):
         print(f'm2: name = {self._name}, score = {self._score}')
