@@ -8,6 +8,18 @@ elif CONDITION:
 else:
     STATEMENT
 
+if x:
+    STATEMENT
+
+    只要 x 是非空数值, 非空列表，非空字符串，非空集合... 则判断为True
+    下面为Fase:
+        ''
+        {}
+        []
+        0
+        0.0
+
+
 Version: 0.1
 Author: slynxes
 Date: 2018-12-01
