@@ -83,6 +83,15 @@
         但类属性并没有受到限制。
         __slots__ = ('NAME1', 'NAME2', ...)
 
+    __dict__
+        类字段，将类转化为字典对象返回
+
+    __module__
+        返回类的模块名称
+
+    __qualname__
+        返回类名称
+
 cls, self
     cls: 代表当前类本身
     self: 代表实例本身
@@ -137,7 +146,7 @@ class Student(object):
         return self._score + other.scores
 
     def print_score(self):
-        print(f'name = {self._name}, score = {self._score}, age = {self._age}')
+        print(f'name = {self._name}, score = {self._score}, age = {self.age}')
 
     @property
     def scores(self):
