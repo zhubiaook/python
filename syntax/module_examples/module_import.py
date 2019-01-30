@@ -22,6 +22,12 @@
         Python安装目录下的Lib目录下
     4. 第三方库site-packages目录下
         Python安装目录下的Lib/site-packages 或项目目录下的/venv/Lib/site-packages
+模块属性
+    __doc__: 模块帮助文档，模块最前面的注释语句
+    __file__: 模块文件系统上的路径
+    __name__: 模块的名称，当前模块为程序入口时为'__main__'，否则为package.module
+    __package__: 模块所在的包名
+    __cached__: 模块字节码缓存的路径
 
 Version: 0.1
 Author: slynxes
@@ -34,3 +40,6 @@ import module_examples.m1 as m1
 from module_examples.m2 import Student as m2stu
 
 
+if __name__ == '__main__':
+    print(__name__)
+    print(m1.__name__)
