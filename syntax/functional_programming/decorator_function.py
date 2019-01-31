@@ -5,7 +5,13 @@
     def func
         ...
     等同于
-    decorator(func)
+    func = decorator(func)
+
+    @decorator(args)
+    def func
+        ...
+    等同于
+    func = decorator(args)(func)
 
 Version: 0.1
 Author: slynxes
@@ -15,17 +21,43 @@ from datetime import datetime
 
 
 def log(func):
-    def wrapper(*args, **kw):
-        print(f'call {func.__name__}')
+    def wrapper(name):
+        print(f'wrapper_name = {name}')
         print(datetime.now())
-        return func(*args, **kw)
+        name = name + 'func'
+        return func(name)
     return wrapper
 
 
 @log
-def sum_num():
-    pass
+def sum_num(name):
+    print(f'sum_num: {name}')
+    return 100
+
+
+def decorator_f(func):
+    def inter(name):
+        name = name + ' good'
+        return func(name)
+    return inter
+
+
+def log(text):
+    def decorator(func):
+        def wrapper(*args, **kw):
+            print(text)
+            return func()
+        return wrapper
+    return decorator
+
+
+@log('execute')
+def now():
+    print('2018-10-11')
 
 
 if __name__ == '__main__':
-    sum_num()
+    a = sum_num('good')
+    print(a)
+
+    now()
