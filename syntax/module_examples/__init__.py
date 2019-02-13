@@ -8,3 +8,5 @@ Date: 2019-01-23
 """
 
 print('module_example is imported')
+
+from .m1 import who_am_i

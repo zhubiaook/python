@@ -74,6 +74,15 @@ def f_variable_length_arg(*arg):
     for i in arg:
         print(i)
 
+def f_variable_length_dict_arg(**args):
+    """
+    参数args是一个元素个数为任意个的字典
+    :param args:
+    :return:
+    """
+    for k, v in args.items():
+        print(k, v)
+
 
 def f_reference_value(my_list):
     """
